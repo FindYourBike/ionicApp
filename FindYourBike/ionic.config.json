@@ -1,7 +1,5 @@
 {
   "name": "FindYourBike",
-  "integrations": {
-    "capacitor": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
