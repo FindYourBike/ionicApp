@@ -5,5 +5,31 @@
 </ion-header>
 
 <ion-content>
+  <agm-map [latitude]="gemiddeldeLat" [longitude]="gemiddeldeLong" [zoom]="8">
+    <agm-marker
+     [latitude]="latitude" 
+     [longitude]="longitude"
+     [iconUrl]="
+     {
+       url: './assets/bicycle-outline.svg',
+       scaledSize: {
+        width: 40,
+        height: 30
+      }
+     }">
+    </agm-marker>
+    <agm-marker
+    [latitude]="lat" 
+    [longitude]="long"
+    [iconUrl]="
+    {
+      url: './assets/bicycle-outline.svg',
+      scaledSize: {
+       width: 40,
+       height: 30
+     }
+    }">
+   </agm-marker>
+  </agm-map>
 
 </ion-content>
