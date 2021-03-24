@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Find your bike</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <form>
+    <div class="input-group">
+      <ion-item color="dark">
+        <ion-input type="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item color="dark">
+        <ion-input type="password" placeholder="Password"></ion-input>
+      </ion-item>
+    </div>
+    <ion-button color="primary" type="submit" expand="block" [routerLink]="['../tabs']"><b>Log in</b></ion-button>
+    <ion-button type="button" expand="block" color="primary"><b>Sign up</b></ion-button>
+  </form>
+
+</ion-content>
