@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>map</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <agm-map [latitude]="gemiddeldeLat" [longitude]="gemiddeldeLong" [zoom]="8">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="13">
     <agm-marker
      [latitude]="latitude" 
      [longitude]="longitude"
@@ -18,18 +21,6 @@
       }
      }">
     </agm-marker>
-    <agm-marker
-    [latitude]="lat" 
-    [longitude]="long"
-    [iconUrl]="
-    {
-      url: './assets/bicycle-outline.svg',
-      scaledSize: {
-       width: 40,
-       height: 30
-     }
-    }">
-   </agm-marker>
   </agm-map>
 
 </ion-content>

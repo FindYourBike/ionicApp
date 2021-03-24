@@ -7,14 +7,14 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'map',
+    redirectTo: 'bikes',
     pathMatch: 'full'
   },
   {
     path: '',
     component: TabsPage,
     children: [
-      { path: 'map', loadChildren: () => import('../map/map.module').then( m => m.MapPageModule)},
+      { path: 'bikes', loadChildren: () => import('../bikes/bikes.module').then( m => m.BikesPageModule)},
       { path: 'daily-report', loadChildren: () => import('../daily-report/daily-report.module').then( m => m.DailyReportPageModule)},
       { path: 'account', loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule)},
     ]
