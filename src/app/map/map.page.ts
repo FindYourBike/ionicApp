@@ -22,11 +22,12 @@ export class MapPage implements OnInit {
     //this.gemiddeldeLat = (this.latitude + this.lat)/2;
     //this.gemiddeldeLong = (this.longitude + this.long)/2;
 
-    this.service.GetBikeInfo().subscribe(response => this.SetBikeInfo(response))
+
 
   }
 
   ngOnInit() {
+    this.service.GetBikeInfo().subscribe(response => this.SetBikeInfo(response))
   }
 
   SetBikeInfo(info : IBikeInfo){
