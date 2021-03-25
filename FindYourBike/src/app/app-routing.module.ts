@@ -14,7 +14,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
     //canLoad: [AuthGuad]
+  },  {
+    path: 'registration',
+    loadChildren: () => import('./guards/registration/registration.module').then( m => m.RegistrationPageModule)
   },
+
 ];
 
 @NgModule({
