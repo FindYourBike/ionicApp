@@ -32,7 +32,7 @@ export class MapPage implements OnInit {
   SetBikeInfo(info : IBikeInfo){
     console.log(info);
     this.latitude = info.latitude;
-    this.longitude = info.lontitude;
+    this.longitude = info.longitude;
   }
 
 }

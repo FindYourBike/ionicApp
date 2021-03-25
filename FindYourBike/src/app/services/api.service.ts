@@ -16,7 +16,7 @@ export class APIService {
 
 
   export interface IBikeInfo {
-      lontitude: string;
+      longitude: string;
       BikeID: string;
       latitude: string;
       LocationTimeStamp: number;
