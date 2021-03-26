@@ -3,8 +3,8 @@
     <ion-title color="dark">My bikes</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <ion-spinner *ngIf="loading"></ion-spinner>
   <ion-list>
     <ion-card *ngFor="let bike of bikes; let i = index">
       <ion-card-header>
