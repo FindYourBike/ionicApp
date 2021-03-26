@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { APIService, IBikeInfo } from '../services/api.service';
 
 @Component({
@@ -8,32 +9,25 @@ import { APIService, IBikeInfo } from '../services/api.service';
 })
 export class MapPage implements OnInit {
   
-  // latitude = 51.230077585660105;
-  // longitude = 4.416849648098205;
+  @Input() BikeID: string;
 
   latitude: string;
   longitude: string;
+  route: ActivatedRoute
 
-
-  //gemiddeldeLat: number;
-  //gemiddeldeLong: number;
-
-  constructor(public service : APIService) { 
-    //this.gemiddeldeLat = (this.latitude + this.lat)/2;
-    //this.gemiddeldeLong = (this.longitude + this.long)/2;
-
-
-
+  constructor(public service : APIService, route: ActivatedRoute) { 
+    this.route = route;
   }
 
   ngOnInit() {
-    this.service.GetBikeInfo().subscribe(response => this.SetBikeInfo(response))
+    this.BikeID = this.route.snapshot.paramMap.get('BikeID')
+    this.service.GetBikeInfo(this.BikeID).subscribe(response => this.SetBikeInfo(response))
   }
 
   SetBikeInfo(info : IBikeInfo){
     console.log(info);
-    this.latitude = info.latitude;
-    this.longitude = info.longitude;
+    this.latitude = info.lat;
+    this.longitude = info.lon;
   }
 
 }

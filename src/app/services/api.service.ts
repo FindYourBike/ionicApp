@@ -8,19 +8,28 @@ export class APIService {
 
   constructor(private http : HttpClient) { }
 
-  GetBikeInfo(){
-    return this.http.get<IBikeInfo>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/bikes/TestDemo1`)
+  GetBikeInfo(BikeID : string){
+    return this.http.get<IBikeInfo>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/bikes/` + BikeID)
+  }
+
+  GetBikes(){
+    return this.http.get<IBikes>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/users/testuser`)
   }
 }
 
 
 
   export interface IBikeInfo {
-      longitude: string;
+      lon: string;
       BikeID: string;
-      latitude: string;
-      LocationTimeStamp: number;
+      lat: string;
+      time: number;
   }
+
+  export interface IBikes {
+    UserID: string;
+    bikes: string[];
+}
 
 
 

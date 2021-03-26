@@ -5,7 +5,7 @@ import { MapPage } from './map.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':BikeID',
     component: MapPage
   }
 ];

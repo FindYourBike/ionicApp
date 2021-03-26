@@ -5,52 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color="light">Mountainbike</ion-card-title>
-      <ion-card-subtitle color="light">Robbe Willeme</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button fill="outline" [routerLink]="['map']">
-        <ion-icon name="navigate-outline" slot="start"></ion-icon>
-        Find this bike
-      </ion-button>
-      <ion-button color="danger" fill="clear" slot="end">
-        <ion-icon name="trash-outline" slot="end"></ion-icon> 
-      </ion-button><br>
-        last time updated: 10 minutes ago
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color="light">Daily city bike</ion-card-title>
-      <ion-card-subtitle color="light">Robbe Willeme</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button fill="outline" [routerLink]="['map']">
-        <ion-icon name="navigate-outline" slot="start"></ion-icon>
-        Find this bike
-      </ion-button>
-      <ion-button color="danger" fill="clear" slot="end">
-        <ion-icon name="trash-outline" slot="end"></ion-icon> 
-      </ion-button><br>
-        last time updated: 8 minutes ago
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color="light">Child bike</ion-card-title>
-      <ion-card-subtitle color="light">Name of your child</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-button fill="outline" [routerLink]="['map']">
-        <ion-icon name="navigate-outline" slot="start"></ion-icon>
-        Find this bike
-      </ion-button>
-      <ion-button color="danger" fill="clear" slot="end">
-        <ion-icon name="trash-outline" slot="end"></ion-icon> 
-      </ion-button><br>
-        last time updated: 1 minute ago
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-card *ngFor="let bike of bikes; let i = index">
+      <ion-card-header>
+        <ion-card-title color="light">{{bike.bikename}}</ion-card-title>
+        <ion-card-subtitle color="light">Robbe Willeme</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button fill="outline" routerLink="map/{{bike.BikeID}}">
+          <ion-icon name="navigate-outline" slot="start"></ion-icon>
+          Find this bike
+        </ion-button>
+        <ion-button color="danger" fill="clear" slot="end">
+          <ion-icon name="trash-outline" slot="end"></ion-icon> 
+        </ion-button><br>
+          Last time updated: {{bike.time}} Minute(s) ago
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
