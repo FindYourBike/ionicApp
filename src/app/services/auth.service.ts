@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
 
 const PoolData = {
@@ -13,7 +15,7 @@ const userPool = new CognitoUserPool(PoolData);
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(public jwtHelper: JwtHelperService, private router: Router) { }
 
   /// Sign Up User
   signupUser(user: string, password: string, email: string) {
@@ -69,8 +71,10 @@ export class AuthService {
       onSuccess: (result) => {
         console.log('You are now Logged in');
         console.log(result)
+        // store the token
+        localStorage.setItem('token', result.getIdToken().getJwtToken())
         //this.isUser.next(true);
-        //this.router.navigate(['/'])
+        this.router.navigate(['/tabs'])
       },
       onFailure: (err) => {
         console.log('There was an error during login, please try again -> ', err)
@@ -83,7 +87,16 @@ export class AuthService {
   logoutUser() {
     userPool.getCurrentUser().signOut();
     console.log("logged out")
-    //this.router.navigate(['home'])
+    localStorage.setItem('token',"")
+    this.router.navigate(['/'])
+  }
+
+  /// Check whether user token is still valid
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }
 
