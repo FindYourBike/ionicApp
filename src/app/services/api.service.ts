@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 })
 export class APIService {
 
-  constructor(private http : HttpClient) { 
+  constructor(private http : HttpClient, private service : AuthService) { 
 
   }
 
@@ -15,14 +15,14 @@ export class APIService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/xml',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.service.getToken()
       })
     };
     return this.http.get<IBikeInfo>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/bikes/` + BikeID, httpOptions)
   }
 
   GetBikes(){
-    return this.http.get<IBikes>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/users/testuser`)
+    return this.http.get<IBikes>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID())
   }
 }
 
