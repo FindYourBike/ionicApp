@@ -115,12 +115,29 @@ export class AuthService {
   }
 
   public getUserID(): string{
-    return this.jwtHelper.decodeToken(localStorage.getItem('token'))["sub"]
+    return this.jwtHelper.decodeToken(this.getToken())["sub"]
   }
   
   public getToken(): string{
     return localStorage.getItem('token')
   }
+
+  public getUserInfo(): IUserInfo{
+
+    const user: IUserInfo = {
+      username: this.jwtHelper.decodeToken(this.getToken())["cognito:username"],
+      email: this.jwtHelper.decodeToken(this.getToken())["email"],
+      name: this.jwtHelper.decodeToken(this.getToken())["name"],
+    };
+
+    return user
+  }
+}
+
+export interface IUserInfo {
+  username: string;
+  email: string;
+  name: string;
 }
 
 

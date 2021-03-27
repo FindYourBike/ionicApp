@@ -9,13 +9,11 @@ const routes: Routes = [
   { 
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
-    //canLoad: [AutoLoginGuard]
     canActivate: [AuthGuard]
   },
   { 
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    //canLoad: [AuthGuad]
   },
 ];
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService, IUserInfo } from '../services/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -8,9 +8,13 @@ import { AuthService } from '../services/auth.service';
 })
 export class AccountPage implements OnInit {
 
+  @Input() user: IUserInfo;
+
+
   constructor(public service : AuthService) { }
 
   ngOnInit() {
+    this.user = this.service.getUserInfo()
   }
 
   logout(): void {
@@ -18,3 +22,5 @@ export class AccountPage implements OnInit {
   }
 
 }
+
+
