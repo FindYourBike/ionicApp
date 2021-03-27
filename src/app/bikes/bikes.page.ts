@@ -9,27 +9,29 @@ import { APIService, IBikeInfo, IBikes } from '../services/api.service';
 export class BikesPage implements OnInit {
 
   bikes : IBikeInfo[];
-  loading: boolean;
 
   constructor(public service : APIService) { 
     this.bikes = new Array();
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.service.GetBikes().subscribe(response => this.SetBikes(response))
+    this.refresh()
   }
 
   SetBikes(bikes : IBikes){
     bikes.bikes.forEach(element => {
       this.service.GetBikeInfo(element).subscribe(response => this.AddBike(response))
     });
-    this.loading = false;
   }
 
   AddBike(bike : IBikeInfo){
     let now = new Date()
-    bike.time = Math.trunc((now.getTime() - bike.time) / 1000 / 60)
+    bike.time = (now.getTime() - bike.time) / 1000
     this.bikes.push(bike)
+  }
+
+  refresh(): void{
+    this.bikes = new Array()
+    this.service.GetBikes().subscribe(response => this.SetBikes(response))
   }
 }
