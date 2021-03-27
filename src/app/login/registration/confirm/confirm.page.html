@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>confirm</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="confirmForm" (keyup.enter)="tryConfirm()" (ngSubmit)="tryConfirm()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle class="ion-text-center" color="light">Create an account</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item color="drak">
+          <ion-label position="stacked">Confirmation code</ion-label>
+          <ion-input formControlName="code"></ion-input>
+        </ion-item>         
+      </ion-card-content>
+      <ion-button color="primary" type="submit" expand="block" [disabled]="!confirmForm.valid"><b>Confirm</b></ion-button>
+    </ion-card>
+  </form>
+</ion-content>

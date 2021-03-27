@@ -18,21 +18,34 @@ export class AuthService {
   constructor(public jwtHelper: JwtHelperService, private router: Router) { }
 
   /// Sign Up User
-  signupUser(user: string, password: string, email: string) {
+  signupUser(username: string, password: string, email: string, name: string) {
+
+    var attributeList = [];
     const dataEmail = {
       Name: 'email',
       Value: email
     };
-    const  emailAtt = [new CognitoUserAttribute(dataEmail)];
+    const  emailAtt = new CognitoUserAttribute(dataEmail);
 
-    userPool.signUp(user,  password, emailAtt, null, ((err, result) => {
+    const dataName = {
+      Name: 'name',
+      Value: name
+    }
+    const nameAtt = new CognitoUserAttribute(dataName)
+    const attributes = [];
+    attributes.push(emailAtt)
+    attributes.push(nameAtt)
+
+    userPool.signUp(username,  password, attributes, null, function(err, result){
       if (err) {
         console.log('There was an error ', err);
       } else {
-        console.log('You have successfully signed up, please confirm your email ')
+        console.log('You have successfully signed up, please confirm your email ');
       }
-    }))
+    })
+    this.router.navigate(['/login/registration/confirm/' + username]);
   }
+  
 
 
   /// Confirm User
@@ -51,6 +64,7 @@ export class AuthService {
         console.log('You have been confirmed ')
       }
     })
+    this.router.navigate(['/login']);
   }
 
 

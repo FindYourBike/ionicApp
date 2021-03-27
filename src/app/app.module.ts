@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
-import { RegistrationPage } from './registration/registration.page';
 
 @NgModule({
   declarations: [AppComponent],

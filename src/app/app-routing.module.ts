@@ -17,10 +17,6 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
     //canLoad: [AuthGuad]
   },
-  {
-    path: 'logout',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-  }
 ];
 
 @NgModule({
