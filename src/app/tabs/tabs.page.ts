@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IUserInfo } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
+  @Input() user : IUserInfo
   constructor() { }
 
   ngOnInit() {
