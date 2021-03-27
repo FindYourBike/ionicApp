@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Find your bike</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (keyup.enter)="tryRegister()" (ngSubmit)="tryRegister()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle class="ion-text-center" color="light">Create an account</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item color="drak">
+          <ion-label position="stacked">Username</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>  
+        <ion-item color="drak">
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input formControlName="name"></ion-input>
+        </ion-item>  
+        <ion-item color="drak">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item> 
+        <ion-item color="drak">
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item color="drak">
+          <ion-label position="stacked">Confirm password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>      
+      </ion-card-content>
+      <ion-button color="primary" type="submit" expand="block" [disabled]="!registerForm.valid"><b>sign up</b></ion-button>
+    </ion-card>
+  </form>
+</ion-content>
