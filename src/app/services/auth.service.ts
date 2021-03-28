@@ -68,7 +68,7 @@ export class AuthService {
 
 
   //// Sign in User
-  signinUser(username: string, password: string) {
+  public signinUser = (username: string, password: string) => {
     const authData = {
       Username: username,
       Password: password
@@ -79,21 +79,22 @@ export class AuthService {
       Pool: userPool
     };
     const cognitoUser = new CognitoUser(userData);
-
+   
+    return new Promise((resolve, reject) =>
     cognitoUser.authenticateUser(authDetails, {
-      onSuccess: (result) => {
+      onSuccess: result => {
         console.log('You are now Logged in');
         console.log(result)
+
         // store the token
         localStorage.setItem('token', result.getIdToken().getJwtToken())
-        //this.isUser.next(true);
         this.router.navigate(['/tabs'])
+        resolve(result)
       },
-      onFailure: (err) => {
-        console.log('There was an error during login, please try again -> ', err)
-      }
-    })
-  }
+      onFailure: err => reject(err)
+     })
+    );
+   }
 
 
   /// Log User Out

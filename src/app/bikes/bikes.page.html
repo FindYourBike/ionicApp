@@ -23,10 +23,10 @@
           <ion-icon name="trash-outline" slot="end"></ion-icon> 
         </ion-button><br>
           Last time updated:
-          <p style="display: inline;" *ngIf="bike.time < 60">{{bike.time | number: '1.0-0'}} Second(s) ago</p>
-          <p style="display: inline;" *ngIf="60 <= bike.time && bike.time < 3600">{{(bike.time / 60) | number: '1.0-0'}} Minute(s) ago</p>
-          <p style="display: inline;" *ngIf="3600 <= bike.time && bike.time < 86400">{{(bike.time / 60 / 60) | number: '1.0-0'}} Hour(s) ago</p>
-          <p style="display: inline;" *ngIf="86400 <= bike.time">{{(bike.time / 60 / 60 / 24) | number: '1.0-0'}} Day(s) ago</p>
+          <p style="display: inline;" *ngIf="bike.time < 60"><b>{{bike.time | number: '1.0-0'}} S</b>econd(s) ago</p>
+          <p style="display: inline;" *ngIf="60 <= bike.time && bike.time < 3600"><b>{{(bike.time / 60) | number: '1.0-0'}} M</b>inute(s) ago</p>
+          <p style="display: inline;" *ngIf="3600 <= bike.time && bike.time < 86400"><b>{{(bike.time / 60 / 60) | number: '1.0-0'}} H</b>our(s) ago</p>
+          <p style="display: inline;" *ngIf="86400 <= bike.time"><b>{{(bike.time / 60 / 60 / 24) | number: '1.0-0'}} D</b>ay(s) ago</p>
       </ion-card-content>
     </ion-card>
   </ion-list>

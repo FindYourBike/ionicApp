@@ -10,6 +10,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
 
+  loading: boolean;
+
   loginForm = this.formBuilder.group({
     login: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, passwordValidator({
@@ -22,7 +24,7 @@ export class LoginPage implements OnInit {
     })]),
  });
 
-  constructor(public service : AuthService, private router: Router, private formBuilder: FormBuilder) { 
+  constructor(public service : AuthService, private router: Router, private formBuilder: FormBuilder, public toastController: ToastController) { 
   }
 
   ngOnInit() {
@@ -30,11 +32,29 @@ export class LoginPage implements OnInit {
     if(this.service.isAuthenticated()) {
       this.router.navigate(['/tabs'])
     }
+
+    this.loading = false;
   }
 
-  tryLogin(): void{
-    this.service.signinUser(this.loginForm.value["login"],this.loginForm.value["password"])
-    this.loginForm.reset()
+  async tryLogin() {
+    this.loading = true;
+    try {
+      var result = await this.service.signinUser(this.loginForm.value["login"],this.loginForm.value["password"])
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+      this.presentToast(error.message)
+    }
+    this.loginForm.controls['password'].reset()
+    this.loading = false;
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
@@ -43,6 +63,7 @@ export class LoginPage implements OnInit {
 // https://github.com/the-moebius/ng-validators/blob/master/src/validators/password.validator.ts
 
 import { AbstractControl } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 
 export interface PasswordValidatorOptions {
