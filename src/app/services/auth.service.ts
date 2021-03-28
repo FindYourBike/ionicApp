@@ -35,15 +35,17 @@ export class AuthService {
     attributes.push(emailAtt)
     attributes.push(nameAtt)
 
+    return new Promise((resolve, reject) =>
     userPool.signUp(username,  password, attributes, null, function(err, result){
       if (err) {
         console.log('There was an error ', err);
+        reject(err)
       } else {
         console.log('You have successfully signed up, please confirm your email ');
+        resolve(result)
       }
     })
-    this.router.navigate(['/login/registration/confirm/' + username]);
-  }
+    )}
   
 
 
@@ -56,14 +58,16 @@ export class AuthService {
 
     const cognitoUser = new CognitoUser(userData);
 
+    return new Promise((resolve, reject) =>
     cognitoUser.confirmRegistration(code, true, (err, result) => {
       if (err) {
         console.log('There was an error -> ', err)
+        reject(err)
       } else {
         console.log('You have been confirmed ')
+        resolve(result)
       }
-    })
-    this.router.navigate(['/login']);
+    }))
   }
 
 

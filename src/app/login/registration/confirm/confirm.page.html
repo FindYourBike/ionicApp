@@ -13,8 +13,9 @@
         <ion-item color="dark">
           <ion-input formControlName="code" placeholder="Confirmation code"></ion-input>
         </ion-item>
-        <br>     
-        <ion-button #submitBtn color="primary" type="submit" expand="block" [disabled]="!confirmForm.valid"><b>Confirm</b></ion-button>    
+        <br>
+        <div id="spinnercontainer"><ion-spinner *ngIf="loading" color="dark"></ion-spinner></div>     
+        <ion-button #submitBtn color="primary" type="submit" expand="block" [disabled]="!confirmForm.valid" *ngIf="!loading"><b>Confirm</b></ion-button>    
       </ion-card-content>
     </ion-card>
   </form>

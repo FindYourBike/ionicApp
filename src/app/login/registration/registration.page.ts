@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegistrationPage implements OnInit {
 
+  loading: boolean;
+
   options = {
     minLength: 8,
     requireLetters: true,
@@ -27,15 +29,37 @@ export class RegistrationPage implements OnInit {
     confirmPassword: ['',  [Validators.required, matchOtherValidator('password'), passwordValidator(this.options)]]
   })
 
-  constructor(public service : AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(public service : AuthService, private router: Router, private formBuilder: FormBuilder, public toastController: ToastController) { }
 
   ngOnInit() {
+    this.loading = false;
   }
 
   
-  tryRegister(): void{
-    this.service.signupUser(this.registerForm.value["username"], this.registerForm.value["password"], this.registerForm.value["email"], this.registerForm.value["name"])
-    this.registerForm.reset()
+  async tryRegister(){
+    if (!this.registerForm.valid)
+      return;
+
+    this.loading = true;
+
+    try {
+      var result = await this.service.signupUser(this.registerForm.value["username"], this.registerForm.value["password"], this.registerForm.value["email"], this.registerForm.value["name"])
+      this.router.navigate(['/login/registration/confirm/' + this.registerForm.value["username"]]);
+    } catch (error) {
+      this.registerForm.controls['password'].reset()
+      this.registerForm.controls['confirmPassword'].reset()
+      this.presentToast(error.message)
+    }
+
+    this.loading = false
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 
@@ -75,6 +99,7 @@ export class RegistrationPage implements OnInit {
 // https://github.com/the-moebius/ng-validators/blob/master/src/validators/password.validator.ts
 
 import { AbstractControl } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 
 export interface PasswordValidatorOptions {

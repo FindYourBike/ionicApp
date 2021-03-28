@@ -37,15 +37,17 @@ export class LoginPage implements OnInit {
   }
 
   async tryLogin() {
+    if (!this.loginForm.valid)
+      return;
+      
     this.loading = true;
     try {
       var result = await this.service.signinUser(this.loginForm.value["login"],this.loginForm.value["password"])
-      console.log(result)
+      this.loginForm.reset()
     } catch(error) {
-      console.log(error)
       this.presentToast(error.message)
+      this.loginForm.controls['password'].reset()
     }
-    this.loginForm.controls['password'].reset()
     this.loading = false;
   }
 

@@ -4,3 +4,11 @@ ion-content {
     --padding-end: 10%;
     --background: url('../../fiets-achtergrond.jpg') 0 0/100% 100% no-repeat;
 }
+
+#spinnercontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

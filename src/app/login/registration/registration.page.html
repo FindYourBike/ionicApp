@@ -34,7 +34,8 @@
           <ion-label position="stacked">Confirm password</ion-label>
           <ion-input type="password" formControlName="confirmPassword" placeholder="Password"></ion-input>
         </ion-item>     
-        <ion-button color="primary" type="submit" expand="block" [disabled]="!registerForm.valid"><b>sign up</b></ion-button> 
+        <div id="spinnercontainer"><ion-spinner *ngIf="loading" color="dark"></ion-spinner></div>
+        <ion-button color="primary" type="submit" expand="block" [disabled]="!registerForm.valid" *ngIf="!loading"><b>sign up</b></ion-button> 
       </ion-card-content>
     </ion-card>
   </form>
