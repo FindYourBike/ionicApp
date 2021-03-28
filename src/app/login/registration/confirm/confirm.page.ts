@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ConfirmPage implements OnInit {
 
   confirmForm = this.formBuilder.group({
-    code: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    code: new FormControl('', [Validators.required, Validators.pattern("[0-9]{6}")]),
  });
  
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public service : AuthService) { }

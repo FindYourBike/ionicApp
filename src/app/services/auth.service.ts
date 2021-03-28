@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
-import { RegistrationPage } from '../login/registration/registration.page';
 
 const PoolData = {
   UserPoolId: 'us-east-1_Ef3bmvCFF',
@@ -21,7 +20,6 @@ export class AuthService {
   /// Sign Up User
   signupUser(username: string, password: string, email: string, name: string) {
 
-    var attributeList = [];
     const dataEmail = {
       Name: 'email',
       Value: email
