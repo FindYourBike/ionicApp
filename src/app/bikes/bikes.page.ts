@@ -27,6 +27,8 @@ export class BikesPage implements OnInit {
   AddBike(bike : IBikeInfo){
     let now = new Date()
     bike.time = (now.getTime() - bike.time) / 1000
+    console.log(bike.bat)
+    //bike.battery = Math.trunc(Math.random() * 100)
     this.bikes.push(bike)
   }
 

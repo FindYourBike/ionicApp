@@ -9,25 +9,42 @@
 <ion-content>
   <ion-spinner *ngIf="bikes == 0"></ion-spinner>
   <ion-list>
-    <ion-card *ngFor="let bike of bikes; let i = index">
-      <ion-card-header>
-        <ion-card-title color="dark" style="font-weight: bold;">{{bike.bikename}}</ion-card-title>
-        <ion-card-subtitle color="dark" style="font-style: italic;">{{bike.BikeID}}</ion-card-subtitle>
+
+    <ion-card *ngFor="let bike of bikes; let i = index" style="display: grid;">
+      <ion-card-header class="grid-item">
+        <div style="display: flex;">
+          <ion-card-title color="dark" style="font-weight: bold;">{{bike.bikename}}</ion-card-title>
+          <ion-button fill="clear" size="small" style="display: inline;">
+            <ion-icon name="settings-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <!--<ion-card-subtitle color="dark" style="font-style: italic;">{{bike.BikeID}}</ion-card-subtitle>-->
       </ion-card-header>
-      <ion-card-content>
-        <ion-button fill="outline" routerLink="map/{{bike.BikeID}}">
-          <ion-icon name="navigate-outline" slot="start"></ion-icon>
-          Find this bike
-        </ion-button>
-        <ion-button color="danger" fill="clear" slot="end">
-          <ion-icon name="trash-outline" slot="end"></ion-icon> 
-        </ion-button><br>
-          Last time updated:
+      <ion-card-content class="grid-item" style="grid-column-start: 1;">
+        <div>
+          <ion-button fill="outline" routerLink="map/{{bike.BikeID}}">
+            <ion-icon name="navigate-outline" slot="start"></ion-icon>
+            Find this bike
+          </ion-button>
+          <!--<ion-button color="danger" fill="clear" slot="end">
+            <ion-icon name="trash-outline" slot="end"></ion-icon> 
+          </ion-button>--><br>
+          Last updated:
           <p style="display: inline;" *ngIf="bike.time < 60"><b>{{bike.time | number: '1.0-0'}} S</b>econd(s) ago</p>
           <p style="display: inline;" *ngIf="60 <= bike.time && bike.time < 3600"><b>{{(bike.time / 60) | number: '1.0-0'}} M</b>inute(s) ago</p>
           <p style="display: inline;" *ngIf="3600 <= bike.time && bike.time < 86400"><b>{{(bike.time / 60 / 60) | number: '1.0-0'}} H</b>our(s) ago</p>
           <p style="display: inline;" *ngIf="86400 <= bike.time"><b>{{(bike.time / 60 / 60 / 24) | number: '1.0-0'}} D</b>ay(s) ago</p>
+        </div>
+      </ion-card-content>
+      <ion-card-content class="grid-item" style="grid-column-start: 2; grid-row: 1 / 3;">
+        <div style="text-align: center;  font-size: 55px;">
+          <ion-icon name="battery-dead-outline" class="batteryicon" *ngIf="bike.bat <= 25"></ion-icon>
+          <ion-icon name="battery-half-outline" class="batteryicon" *ngIf="25 < bike.bat && bike.bat < 75"></ion-icon>
+          <ion-icon name="battery-full-outline" class="batteryicon" *ngIf="75 <= bike.bat"></ion-icon>
+          <p style="text-align: center; font-size: 50%; margin-top: 0; margin-bottom: 0;">{{bike.bat}}%</p>
+        </div>
       </ion-card-content>
     </ion-card>
+    
   </ion-list>
 </ion-content>

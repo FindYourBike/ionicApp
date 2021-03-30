@@ -14,7 +14,7 @@ export class APIService {
   GetBikeInfo(BikeID : string){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/xml',
+        'Content-Type':  'application/json',
         'Authorization': this.service.getToken()
       })
     };
@@ -24,7 +24,7 @@ export class APIService {
   GetBikes(){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/xml',
+        'Content-Type':  'application/json',
         'Authorization': this.service.getToken()
       })
     };
@@ -39,6 +39,7 @@ export class APIService {
       BikeID: string;
       lat: string;
       time: number;
+      bat: number;
   }
 
   export interface IBikes {
