@@ -1,0 +1,52 @@
+<ion-content  fullscreen class="ion-padding" scroll-y="false">
+  <ion-slides pager="true">
+
+      <ion-slide>
+        <div class="slide">
+          <h2>Add a bike</h2>
+          <img src="assets/BikeIcon.jpg" class="img-hor-vert"/>
+          <ion-button fill="clear" (click)="goto(1)">Continue<ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>Give your bike a name</h2>
+        <p>This can be whatever you want for example; 'Daily city bike'</p>
+        <br><br><br><br><br>
+        <form [formGroup]="addFormName" (keyup.enter)="tryAddName()" (ngSubmit)="tryAddName()">
+          <ion-item color="dark">
+            <ion-input type="text" formControlName="name" placeholder="bikename"></ion-input>
+          </ion-item>
+          <br><br><br>
+          <ion-button fill="clear" type="submit" [disabled]="!addFormName.valid">Continue<ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        </form>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>Enter the tracker ID</h2>
+        <p>The tracker ID should be located on the white label on the tracker</p>
+        <br><br><br><br><br>
+        <form [formGroup]="addFormID" (keyup.enter)="tryAddID()" (ngSubmit)="tryAddID()"> 
+          <ion-item color="dark">
+            <ion-input type="text" formControlName="ID" placeholder="tracker ID"></ion-input>
+          </ion-item>
+          <br><br><br>
+          <ion-button fill="clear" type="submit" [disabled]="!addFormID.valid">Continue<ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        </form>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>Add this bike?</h2>
+        <br><br><br><br><br>
+        <ion-item>
+          <ion-title>{{name}}</ion-title>
+        </ion-item>
+        <ion-item>
+          <p>{{ID}}</p>
+        </ion-item>
+        <br><br><br>
+        <ion-button fill="clear">Add<ion-icon slot="end" name="add-outline"></ion-icon></ion-button>
+      </ion-slide>
+
+  </ion-slides>
+</ion-content>

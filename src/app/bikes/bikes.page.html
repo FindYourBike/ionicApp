@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>My bikes</ion-title>
+    <ion-button slot="primary" routerLink="add">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
     <ion-button slot="primary" (click)="refresh()">
       <ion-icon name="refresh-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="spinnerCenter">
   <ion-spinner *ngIf="bikes == 0"></ion-spinner>
   <ion-list color="light">
 

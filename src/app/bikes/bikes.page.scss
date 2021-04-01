@@ -9,3 +9,11 @@ ion-spinner {
     transform: rotate(-90deg);
     text-align: center;
 }
+
+.spinnerCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
