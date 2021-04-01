@@ -7,14 +7,14 @@
 <ion-content>
   <form [formGroup]="loginForm" (keyup.enter)="tryLogin()" (ngSubmit)="tryLogin()">
     <div class="input-group">
-      <ion-item color="dark">
+      <ion-item color="light">
         <ion-input type="email" formControlName="login" placeholder="Email / Username"></ion-input>-->
       </ion-item>
-      <ion-item color="dark">
+      <ion-item color="light">
         <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>-->
       </ion-item>
     </div>
-    <div id="spinnercontainer"><ion-spinner *ngIf="loading" color="light"></ion-spinner></div>
+    <div id="spinnercontainer"><ion-spinner *ngIf="loading" color="dark"></ion-spinner></div>
     <div *ngIf="!loading">
       <ion-button color="primary" type="submit" expand="block" [disabled]="!loginForm.valid"><b>Log in</b></ion-button>
       <ion-button expand="block" color="primary" [routerLink]="['./registration']"><b>Sign up</b></ion-button>
