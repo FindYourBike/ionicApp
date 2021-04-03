@@ -18,7 +18,7 @@ export class APIService {
         'Authorization': this.service.getToken()
       })
     };
-    return this.http.get<IBikeInfo>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/bikes/` + BikeID, httpOptions)
+    return this.http.get<IBikeInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/bikes/` + BikeID, httpOptions)
   }
 
   GetBikes(){
@@ -28,7 +28,7 @@ export class APIService {
         'Authorization': this.service.getToken()
       })
     };
-    return this.http.get<IBikes>(`https://xdzj4zber6.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), httpOptions)
+    return this.http.get<IBikes>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), httpOptions)
   }
 }
 

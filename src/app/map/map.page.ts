@@ -11,8 +11,8 @@ export class MapPage implements OnInit {
   
   @Input() BikeID: string;
 
-  latitude: string;
-  longitude: string;
+  latitude: Number;
+  longitude: Number;
   route: ActivatedRoute
 
   constructor(public service : APIService, route: ActivatedRoute) { 
@@ -25,8 +25,8 @@ export class MapPage implements OnInit {
   }
 
   SetBikeInfo(info : IBikeInfo){
-    this.latitude = info.lat;
-    this.longitude = info.lon;
+    this.latitude = Number(info.lat);
+    this.longitude = Number(info.lon);
   }
 
 }
