@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { APIService } from '../../services/api.service';
 import { IonSlides } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -22,7 +23,7 @@ export class AddPage implements OnInit {
   })
 
   @ViewChild(IonSlides) slides: IonSlides;
-  constructor(public service : APIService, private formBuilder: FormBuilder) { 
+  constructor(public service : APIService, private formBuilder: FormBuilder, private router: Router) { 
   }
 
   ngOnInit() {
@@ -60,17 +61,20 @@ export class AddPage implements OnInit {
     var body = {}
     var bikelist = new Array()
     this.service.GetBikes().subscribe(bikes => {
-      bikes.bikes.forEach(element => {
-        bikelist.push(element)
-      });
+      if(bikes.bikes != undefined || bikes.bikes != null) {
+        bikes.bikes.forEach(element => {
+          bikelist.push(element)
+        });
+      }
       var newbike = new Object()
       newbike["bikename"] = this.name
       newbike["bikeid"] = this.ID
-      console.log(newbike)
       bikelist.push(newbike)
       body["bikes"] = bikelist
       this.service.PatchUser(JSON.stringify(body))
+
     })
+    this.router.navigate(['/tabs/bikes']);
   }
 
 }

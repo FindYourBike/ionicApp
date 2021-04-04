@@ -8,7 +8,7 @@ import { APIService, IBikePing, IUserInfo } from '../services/api.service';
 })
 export class BikesPage implements OnInit {
 
-  bikes : IBikeCard[];
+  bikes : ICard[];
   loading : boolean;
 
   constructor(public service : APIService) { 
@@ -26,8 +26,18 @@ export class BikesPage implements OnInit {
     }
     var jsonbikes = JSON.parse(JSON.stringify(bikes.bikes))
     jsonbikes.forEach(element => {
-      this.service.GetBikePing(element.bikeid).subscribe(response => this.AddBikeCard(response, element.bikename))
-    });
+      this.service.GetBikePing(element.bikeid).subscribe(response => {
+        if(response != undefined && response != null) {
+          this.AddBikeCard(response, element.bikename)
+          console.log(response)
+        } else {
+          console.log("here")
+        }
+      }, error => {
+        console.log(error)
+        this.AddErrorCard(element.bikename)
+      });
+    })
   }
 
   AddBikeCard(bike : IBikePing, bikename : string){
@@ -45,18 +55,33 @@ export class BikesPage implements OnInit {
     this.loading = false;
   }
 
+  AddErrorCard(bikename : string) {
+    var newcard : ICard = {
+      name: bikename
+    }
+    this.bikes.push(newcard)
+    this.loading = false;
+  }
+
   refresh(): void{
     this.loading = true;
     this.bikes = new Array()
     this.service.GetBikes().subscribe(response => this.SetBikes(response))
   }
+
+  instanceOfIBikeCard(object: any): object is IBikeCard {
+    return 'bat' in object;
+}
 }
 
-export interface IBikeCard {
+interface IBikeCard extends ICard {
   lon: string;
   id: string;
   lat: string;
   time: number;
   bat: number;
-  name: string;
+}
+
+interface ICard {
+  name : string
 }
