@@ -10,9 +10,21 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="spinnerCenter">
-  <ion-spinner *ngIf="bikes == 0"></ion-spinner>
-  <ion-list color="light">
 
+  <ion-spinner *ngIf="loading == true"></ion-spinner>
+
+  <div *ngIf="loading == false && bikes == 0">
+    <ion-slides>
+      <ion-slide>
+        <div class="slide">
+          <h2>Welcome</h2>
+          <p>Start by adding your first bike.</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-list color="light">
     <ion-card *ngFor="let bike of bikes; let i = index" style="display: grid;">
       <ion-card-header class="grid-item">
         <div style="display: flex;">

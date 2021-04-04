@@ -9,6 +9,7 @@ import { APIService, IBikePing, IUserInfo } from '../services/api.service';
 export class BikesPage implements OnInit {
 
   bikes : IBikeCard[];
+  loading : boolean;
 
   constructor(public service : APIService) { 
     this.bikes = new Array();
@@ -19,6 +20,10 @@ export class BikesPage implements OnInit {
   }
 
   SetBikes(bikes : IUserInfo){
+    if(bikes.bikes == undefined || bikes.bikes == null) {
+      this.loading = false
+      return
+    }
     var jsonbikes = JSON.parse(JSON.stringify(bikes.bikes))
     jsonbikes.forEach(element => {
       this.service.GetBikePing(element.bikeid).subscribe(response => this.AddBikeCard(response, element.bikename))
@@ -37,9 +42,11 @@ export class BikesPage implements OnInit {
       bat: bike.bat
     }
     this.bikes.push(newbike)
+    this.loading = false;
   }
 
   refresh(): void{
+    this.loading = true;
     this.bikes = new Array()
     this.service.GetBikes().subscribe(response => this.SetBikes(response))
   }
