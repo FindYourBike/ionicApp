@@ -11,14 +11,14 @@ export class APIService {
 
   }
 
-  GetBikeInfo(BikeID : string){
+  GetBikePing(BikeID : string){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': this.service.getToken()
       })
     };
-    return this.http.get<IBikeInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/bikes/` + BikeID, httpOptions)
+    return this.http.get<IBikePing>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/pings/` + BikeID, httpOptions)
   }
 
   GetBikes(){
@@ -28,23 +28,34 @@ export class APIService {
         'Authorization': this.service.getToken()
       })
     };
-    return this.http.get<IBikes>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), httpOptions)
+    return this.http.get<IUserInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), httpOptions)
   }
+
+  PatchUser(body){
+    //console.log(JSON.parse(body))
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.service.getToken()
+      })
+    };
+
+    this.http.patch<IUserInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {console.log(data)})  }
 }
 
 
 
-  export interface IBikeInfo {
+  export interface IBikePing {
       lon: string;
-      BikeID: string;
+      id: string;
       lat: string;
       time: number;
       bat: number;
   }
 
-  export interface IBikes {
+  export interface IUserInfo {
     UserID: string;
-    bikes: string[];
+    bikes: Object[];
 }
 
 

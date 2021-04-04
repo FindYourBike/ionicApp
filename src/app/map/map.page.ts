@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { APIService, IBikeInfo } from '../services/api.service';
+import { APIService, IBikePing } from '../services/api.service';
 
 @Component({
   selector: 'app-map',
@@ -21,10 +21,10 @@ export class MapPage implements OnInit {
 
   ngOnInit() {
     this.BikeID = this.route.snapshot.paramMap.get('BikeID')
-    this.service.GetBikeInfo(this.BikeID).subscribe(response => this.SetBikeInfo(response))
+    this.service.GetBikePing(this.BikeID).subscribe(response => this.SetBikeInfo(response))
   }
 
-  SetBikeInfo(info : IBikeInfo){
+  SetBikeInfo(info : IBikePing){
     this.latitude = Number(info.lat);
     this.longitude = Number(info.lon);
   }

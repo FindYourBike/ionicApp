@@ -56,4 +56,17 @@ export class AddPage implements OnInit {
     this.goto(3)
   }
 
+  async tryAddBike() {
+    var body = {}
+    var bikelist = new Array()
+    this.service.GetBikes().subscribe(bikes => {
+      bikes.bikes.forEach(element => {
+        bikelist.push(element)
+      });
+      bikelist.push(this.ID)
+      body["bikes"] = bikelist
+      this.service.PatchUser(JSON.stringify(body))
+    })
+  }
+
 }
