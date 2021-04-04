@@ -63,7 +63,11 @@ export class AddPage implements OnInit {
       bikes.bikes.forEach(element => {
         bikelist.push(element)
       });
-      bikelist.push(this.ID)
+      var newbike = new Object()
+      newbike["bikename"] = this.name
+      newbike["bikeid"] = this.ID
+      console.log(newbike)
+      bikelist.push(newbike)
       body["bikes"] = bikelist
       this.service.PatchUser(JSON.stringify(body))
     })

@@ -32,7 +32,6 @@ export class APIService {
   }
 
   PatchUser(body){
-    //console.log(JSON.parse(body))
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -40,22 +39,22 @@ export class APIService {
       })
     };
 
-    this.http.patch<IUserInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {console.log(data)})  }
+    this.http.patch<any>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {console.log(data)})  }
 }
 
 
 
-  export interface IBikePing {
-      lon: string;
-      id: string;
-      lat: string;
-      time: number;
-      bat: number;
-  }
+export interface IBikePing {
+  lon: string;
+  id: string;
+  lat: string;
+  time: number;
+  bat: number;
+}
 
-  export interface IUserInfo {
-    UserID: string;
-    bikes: Object[];
+export interface IUserInfo {
+  UserID: string;
+  bikes: Object[];
 }
 
 
