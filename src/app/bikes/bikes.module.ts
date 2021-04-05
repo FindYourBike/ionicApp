@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { BikesPageRoutingModule } from './bikes-routing.module';
+import { UnknownbikeComponent } from './cards/unknownbike/unknownbike.component'
+import { RegularbikeComponent } from './cards/regularbike/regularbike.component'
 
 import { BikesPage } from './bikes.page';
 
@@ -13,8 +15,12 @@ import { BikesPage } from './bikes.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    BikesPageRoutingModule
+    BikesPageRoutingModule,
   ],
-  declarations: [BikesPage]
+  declarations: [
+    BikesPage,
+    UnknownbikeComponent,
+    RegularbikeComponent
+  ]
 })
 export class BikesPageModule {}

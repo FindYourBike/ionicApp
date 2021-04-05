@@ -6,6 +6,7 @@ import { APIService, IBikePing, IUserInfo } from '../services/api.service';
   templateUrl: './bikes.page.html',
   styleUrls: ['./bikes.page.scss'],
 })
+
 export class BikesPage implements OnInit {
 
   bikes : ICard[];
@@ -49,7 +50,8 @@ export class BikesPage implements OnInit {
       lon: bike.lon,
       time: bike.time,
       name: bikename,
-      bat: bike.bat
+      bat: bike.bat,
+      type: "A"
     }
     this.bikes.push(newbike)
     this.loading = false;
@@ -57,7 +59,8 @@ export class BikesPage implements OnInit {
 
   AddErrorCard(bikename : string) {
     var newcard : ICard = {
-      name: bikename
+      name: bikename,
+      type: "B"
     }
     this.bikes.push(newcard)
     this.loading = false;
@@ -82,6 +85,7 @@ interface IBikeCard extends ICard {
   bat: number;
 }
 
-interface ICard {
-  name : string
+export interface ICard {
+  name : string;
+  type: string;
 }
