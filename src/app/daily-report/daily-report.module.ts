@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DailyReportPageRoutingModule } from './daily-report-routing.module';
 
 import { DailyReportPage } from './daily-report.page';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { DailyReportPage } from './daily-report.page';
     IonicModule,
     DailyReportPageRoutingModule
   ],
-  declarations: [DailyReportPage]
+  declarations: [DailyReportPage, CardComponent]
 })
 export class DailyReportPageModule {}

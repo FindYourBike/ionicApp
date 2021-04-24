@@ -5,5 +5,34 @@
 </ion-header>
 
 <ion-content>
-<p style="font-weight: bold;"> DAILY-REPORT</p>
+  <ion-list>
+    <ion-card (click)="expandItem(report)" *ngFor="let report of reports_day">
+      <ion-card-header>
+        <ion-card-title>{{report.date}}</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <app-card expandHeight="100px" [expanded]="report.expanded">
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+          <p>
+            Hello there.
+          </p>
+        </app-card>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
