@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MapPage } from '../map/map.page';
 
 import { TabsPage } from './tabs.page';
 

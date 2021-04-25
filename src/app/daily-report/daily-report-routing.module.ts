@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DailyReportPage
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapComponentModule)
   }
 ];
 

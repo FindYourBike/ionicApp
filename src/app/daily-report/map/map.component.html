@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="12">
+    <agm-marker
+     [latitude]="latitude" 
+     [longitude]="longitude"
+     [iconUrl]="
+     {
+       url: './assets/bicycle-outline.svg',
+       scaledSize: {
+        width: 40,
+        height: 30
+      }
+     }">
+    </agm-marker>
+    <agm-polyline [editable]="false" [strokeColor]="line.color" *ngFor="let line of lines">
+      <agm-polyline-point *ngFor="let node of line.nodes"
+          [latitude]="node.lat"
+          [longitude]="node.lon">
+      </agm-polyline-point>
+    </agm-polyline>
+  </agm-map>
+
+</ion-content>
