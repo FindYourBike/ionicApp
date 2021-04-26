@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ICard } from '../../bikes.page';
+import { PopovercomponentPage } from '../popovercomponent/popovercomponent.page';
+import { PopoverController } from "@ionic/angular";
 
 @Component({
   selector: 'app-regularbike',
@@ -10,12 +12,24 @@ export class RegularbikeComponent implements OnInit {
 
   @Input() bike: IBikeCard;
 
-  constructor() {}
+  constructor(public popoverController:PopoverController) {} 
 
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopovercomponentPage,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+  
   ngOnInit() {
     console.log(this.bike)
   }
-
 }
 
 export interface IBikeCard extends ICard {

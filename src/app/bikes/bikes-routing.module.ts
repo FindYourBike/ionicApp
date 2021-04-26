@@ -9,7 +9,15 @@ const routes: Routes = [
     component: BikesPage,
   },
   { path: 'map', loadChildren: () => import('../map/map.module').then( m => m.MapPageModule)},
-  { path: 'add', loadChildren: () => import('./add/add.module').then( m => m.AddPageModule)},
+  { path: 'add', loadChildren: () => import('./add/add.module').then( m => m.AddPageModule)},  {
+    path: 'delete',
+    loadChildren: () => import('./delete/delete.module').then( m => m.DeletePageModule)
+  },
+  {
+    path: 'popovercomponent',
+    loadChildren: () => import('./cards/popovercomponent/popovercomponent.module').then( m => m.PopovercomponentPageModule)
+  },
+
 ];
 
 @NgModule({
