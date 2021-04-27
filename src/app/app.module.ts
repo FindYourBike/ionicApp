@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -19,7 +21,7 @@ import { JwtModule } from '@auth0/angular-jwt';
       tokenGetter: function  tokenGetter() { 
       return localStorage.getItem('token');
       }}}) ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuard],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuard, LocalNotifications],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
