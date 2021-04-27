@@ -1,5 +1,9 @@
+import { isSyntheticPropertyOrListener } from '@angular/compiler/src/render3/util';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { element } from 'protractor';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { APIService, IBikePing } from 'src/app/services/api.service';
 
 @Component({
@@ -24,36 +28,51 @@ export class MapComponent implements OnInit {
     6: "#C82538",
   }
 
+  public bikename: string;
+  public date: number;
+
   latitude: Number;
   longitude: Number;
   route: ActivatedRoute
+  state$: Observable<object>;
 
   constructor(public service : APIService, route: ActivatedRoute) { 
     this.route = route;
 
-    this.lines = [
-      {nodes: [{lat: 10, lon: 20},{lat: 20, lon: 10}], color: this.colors[1]},
-      {nodes: [{lat: 20, lon: 10},{lat: 50, lon: 60}], color: this.colors[5]},
-      {nodes: [{lat: 50, lon: 60},{lat: 45, lon: 32}], color: this.colors[3]},
-    ]
-  }
+    this.lines = []
+  } 
 
   ngOnInit() {
+    this.state$ = this.route.paramMap.pipe(map(() => window.history.state))
+    this.state$.subscribe(report => {this.SetReport(report)})
     this.latitude = 0
     this.longitude = 0
     //this.BikeID = this.route.snapshot.paramMap.get('BikeID')
     //this.service.GetBikePing(this.BikeID).subscribe(response => this.SetBikeInfo(response))
   }
 
-  SetBikeInfo(info : IBikePing){
-    this.latitude = Number(info.lat);
-    this.longitude = Number(info.lon);
+  SetReport(report){
+    console.log(report)
+    this.date = report.time
+    var previouselement;
+    report.nodes.forEach(element => {
+      console.log(element)
+      if (previouselement != undefined && previouselement != null) {
+        var a: INode = {latitude: Number(previouselement.latitude), longitude: Number(previouselement.longitude)}
+        var b: INode = {latitude: Number(element.latitude), longitude: Number(element.longitude)}
+        var $ = new Array(a, b)
+        this.lines.push({nodes: $, color: this.colors[1]})
+      }
+      previouselement = element;
+    });
+    //this.latitude = Number(info.lat);
+    //this.longitude = Number(info.lon);
   }
 }
 
 interface INode {
-  lat: number;
-  lon: number;
+  latitude: number;
+  longitude: number;
 }
 
 interface ILine {

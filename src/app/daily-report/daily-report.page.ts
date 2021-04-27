@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { APIService, IReport } from '../services/api.service';
+import { IUserInfo } from '../services/api.service';
 
 @Component({
   selector: 'app-daily-report',
@@ -7,18 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DailyReportPage implements OnInit {
   public reports_day = [];
+  reportsmap = new Map();
+  loading : boolean;
 
-  constructor() { 
-    this.reports_day = [
-      {date: "24/5/2021", expanded: false},
-      {date: "4/5/2021", expanded: false},
-      {date: "8/5/2020", expanded: false},
-      {date: "6/5/2021", expanded: false},
-      {date: "16/5/2020", expanded: false},
-    ]
+  constructor(public service : APIService) { 
+    this.loading = true;
   }
 
   ngOnInit() {
+    this.service.GetBikes().subscribe(response => this.SetBikes(response))
+  }
+
+
+  SetBikes(bikes : IUserInfo){
+    if(bikes.bikes == undefined || bikes.bikes == null) {
+      //this.loading = false
+      return
+    }
+    var jsonbikes = JSON.parse(JSON.stringify(bikes.bikes))
+    jsonbikes.forEach(element => {
+      this.service.GetReports(element.bikeid).subscribe(response => {this.SetReports(response)}, error => {});
+    })
+  }
+
+  SetReports(reports : IReport[]){
+    reports.forEach(report => {
+      if (this.reportsmap.has(report.time)) {
+        var toAdd = this.reportsmap.get(report.time);
+        toAdd.push(report)
+        this.reportsmap.set(report.time,toAdd)
+      } else {
+        this.reportsmap.set(report.time,new Array(report))
+      }
+    });
+    this.loading = false;
+    this.reports_day = Array.from(this.reportsmap, ([name, value]) => ({ name, value }));
   }
 
   expandItem(item): void {

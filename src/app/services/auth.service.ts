@@ -138,6 +138,7 @@ export class AuthService {
 }
 
 export interface IUserInfo {
+  [x: string]: any;
   username: string;
   email: string;
   name: string;

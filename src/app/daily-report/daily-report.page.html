@@ -5,29 +5,21 @@
 </ion-header>
 
 <ion-content>
+  <ion-spinner *ngIf="loading == true"></ion-spinner>
+
+  <div *ngIf="loading == false && reports_day == 0" style="text-align: center; height: 100%; width: 100%;">
+    <p>You don't have any daily reports yet</p>
+  </div>
+
   <ion-list>
     <ion-card (click)="expandItem(report)" *ngFor="let report of reports_day">
       <ion-card-header>
-        <ion-card-title>{{report.date}}</ion-card-title>
+        <ion-card-title>{{report.value[0].time | date:'EEEE, d/M/yy'}}</ion-card-title>
       </ion-card-header>
   
       <ion-card-content>
         <app-card expandHeight="150px" [expanded]="report.expanded">
-          <p>
-            Bike 1
-          </p>
-          <p>
-            Bike 2
-          </p>
-          <p>
-            Bike 3
-          </p>
-          <p>
-            Bike 4
-          </p>
-          <p>
-            Bike 5
-          </p>
+          <p *ngFor="let bike of report.value" routerLink="map/{{bike.BikeID}}/{{bike.time}}" [state]="bike">{{bike.BikeID}}</p>
         </app-card>
       </ion-card-content>
     </ion-card>

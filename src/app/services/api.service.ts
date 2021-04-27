@@ -31,6 +31,16 @@ export class APIService {
     return this.http.get<IUserInfo>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), httpOptions)
   }
 
+  GetReports(BikeID : string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this.service.getToken()
+      })
+    };
+    return this.http.get<IReport[]>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/reports/` + BikeID, httpOptions)
+  }
+
   PatchUser(body){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -40,7 +50,7 @@ export class APIService {
     };
 
     this.http.patch<any>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {console.log(data)})  }
-}
+  }
 
 
 
@@ -55,6 +65,21 @@ export interface IBikePing {
 export interface IUserInfo {
   UserID: string;
   bikes: Object[];
+}
+
+export interface IReport {
+  BikeID: string;
+  time: number;
+  distance: number;
+  nodes: INode[];
+}
+
+export interface INode {
+  time: string;
+  roadquality: number;
+  BikeID: string;
+  latitude: number;
+  longitude: number;
 }
 
 
