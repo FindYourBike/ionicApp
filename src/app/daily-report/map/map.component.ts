@@ -61,13 +61,20 @@ export class MapComponent implements OnInit {
         var a: INode = {latitude: Number(previouselement.latitude), longitude: Number(previouselement.longitude)}
         var b: INode = {latitude: Number(element.latitude), longitude: Number(element.longitude)}
         var $ = new Array(a, b)
-        this.lines.push({nodes: $, color: this.colors[1]})
+        console.log("roadqualitycolorindex: " + map_range(element.roadquality,0,10,1,6))
+        this.lines.push({nodes: $, color: this.colors[map_range(element.roadquality,0,10,1,6)]})
       }
       previouselement = element;
     });
     //this.latitude = Number(info.lat);
     //this.longitude = Number(info.lon);
   }
+
+  
+}
+
+function map_range(value, low1, high1, low2, high2) {
+  return Math.round(low2 + (high2 - low2) * (value - low1) / (high1 - low1));
 }
 
 interface INode {

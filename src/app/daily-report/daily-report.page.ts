@@ -33,6 +33,7 @@ export class DailyReportPage implements OnInit {
   }
 
   SetReports(reports : IReport[]){
+    console.log(reports)
     reports.forEach(report => {
       if (this.reportsmap.has(report.time)) {
         var toAdd = this.reportsmap.get(report.time);

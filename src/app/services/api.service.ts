@@ -75,8 +75,8 @@ export interface IReport {
 }
 
 export interface INode {
-  time: string;
-  roadquality: number;
+  time: number;
+  roadquality: string;
   BikeID: string;
   latitude: number;
   longitude: number;
