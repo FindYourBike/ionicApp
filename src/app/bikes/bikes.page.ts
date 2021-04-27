@@ -53,16 +53,19 @@ export class BikesPage implements OnInit {
       bat: bike.bat,
       type: "A"
     }
-    this.bikes.push(newbike)
+    this.bikes.push(newbike);
+    this.sortBikes();
     this.loading = false;
   }
 
   AddErrorCard(bikename : string) {
     var newcard : ICard = {
       name: bikename,
-      type: "B"
+      type: "B",
+      time: 0
     }
-    this.bikes.push(newcard)
+    this.bikes.push(newcard);
+    this.sortBikes();
     this.loading = false;
   }
 
@@ -74,18 +77,28 @@ export class BikesPage implements OnInit {
 
   instanceOfIBikeCard(object: any): object is IBikeCard {
     return 'bat' in object;
-}
+  }
+
+  sortBikes() {
+    this.bikes.sort(function(a, b) {
+      if (a.time === 0)
+        return 1;
+      if (b.time === 0)
+        return -1;
+      return a.time - b.time;
+    });
+  }
 }
 
 interface IBikeCard extends ICard {
   lon: string;
   id: string;
   lat: string;
-  time: number;
   bat: number;
 }
 
 export interface ICard {
   name : string;
   type: string;
+  time: number;
 }
