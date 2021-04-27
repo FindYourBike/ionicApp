@@ -19,7 +19,7 @@ export class AddPage implements OnInit {
   });
 
   addFormID = this.formBuilder.group({
-    ID: new FormControl('', [Validators.required, Validators.pattern("[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}")]),
+    ID: new FormControl('', [Validators.required, Validators.pattern("[0-9a-fA-F]{16}")]),
   })
 
   @ViewChild(IonSlides) slides: IonSlides;

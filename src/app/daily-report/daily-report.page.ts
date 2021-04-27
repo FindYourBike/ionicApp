@@ -6,22 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./daily-report.page.scss'],
 })
 export class DailyReportPage implements OnInit {
-  public items: any = [];
   public reports_day = [];
 
   constructor() { 
-    this.items = [
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false }
-    ];
-
     this.reports_day = [
       {date: "24/5/2021", expanded: false},
       {date: "4/5/2021", expanded: false},
