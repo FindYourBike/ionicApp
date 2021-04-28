@@ -14,12 +14,13 @@ export class RegularbikeComponent implements OnInit {
 
   constructor(public popoverController:PopoverController) {} 
 
-  async presentPopover(ev: any) {
+  async presentPopover(ev: any, bike) {
     const popover = await this.popoverController.create({
       component: PopovercomponentPage,
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true,
+      componentProps: {bike: bike}
     });
     await popover.present();
 

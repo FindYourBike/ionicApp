@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title></ion-title>
+    <ion-title>{{bike.id}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +25,7 @@
       <ion-button expand="block" (click)="ClosePopover($event)">Change name</ion-button>
     </ion-item>
     <ion-item>
-      <ion-button expand="block" (click)="ClosePopover($event)">Delete bike</ion-button>
+      <ion-button expand="block" (click)="ClosePopover($event)" (click)="tryDeleteBike()">Delete bike</ion-button>
     </ion-item>
     
   </ion-list>
