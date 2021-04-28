@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { receiveMessageOnPort } from 'node:worker_threads';
 import { APIService, IReport } from '../services/api.service';
 import { IUserInfo } from '../services/api.service';
 
@@ -22,29 +23,33 @@ export class DailyReportPage implements OnInit {
 
 
   SetBikes(bikes : IUserInfo){
+    console.log(bikes)
     if(bikes.bikes == undefined || bikes.bikes == null) {
-      //this.loading = false
+      this.loading = false
       return
     }
     var jsonbikes = JSON.parse(JSON.stringify(bikes.bikes))
     jsonbikes.forEach(element => {
-      this.service.GetReports(element.bikeid).subscribe(response => {this.SetReports(response)}, error => {});
+      this.service.GetReports(element.bikeid).subscribe(response => {this.SetReports(response,element.bikename)}, error => {});
     })
   }
 
-  SetReports(reports : IReport[]){
+  SetReports(reports : IReport[], bikename: string){
     console.log(reports)
     reports.forEach(report => {
+      report.bikename = bikename;
       if (this.reportsmap.has(report.time)) {
-        var toAdd = this.reportsmap.get(report.time);
+        var [toAdd, toAddDistance] = this.reportsmap.get(report.time);
+        toAddDistance += report.distance
         toAdd.push(report)
-        this.reportsmap.set(report.time,toAdd)
+        this.reportsmap.set(report.time,[toAdd, toAddDistance])
       } else {
-        this.reportsmap.set(report.time,new Array(report))
+        this.reportsmap.set(report.time,[new Array(report),report.distance])
       }
     });
-    this.loading = false;
     this.reports_day = Array.from(this.reportsmap, ([name, value]) => ({ name, value }));
+    console.log(this.reports_day)
+    this.loading = false;
   }
 
   expandItem(item): void {

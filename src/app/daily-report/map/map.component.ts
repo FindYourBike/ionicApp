@@ -53,7 +53,8 @@ export class MapComponent implements OnInit {
 
   SetReport(report){
     console.log(report)
-    this.date = report.time
+    this.date = report.time;
+    this.bikename = report.bikename;
     var previouselement;
     report.nodes.forEach(element => {
       console.log(element)

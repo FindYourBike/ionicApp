@@ -69,6 +69,7 @@ export interface IUserInfo {
 
 export interface IReport {
   BikeID: string;
+  bikename: string;
   time: number;
   distance: number;
   nodes: INode[];

@@ -14,12 +14,13 @@
   <ion-list>
     <ion-card (click)="expandItem(report)" *ngFor="let report of reports_day">
       <ion-card-header>
-        <ion-card-title>{{report.value[0].time | date:'EEEE, d/M/yy'}}</ion-card-title>
+        <ion-card-title>{{report.value[0][0].time | date:'EEEE, d/M/yy'}}</ion-card-title>
+        <ion-card-subtitle>{{report.value[1] | number: '1.2-2'}}km</ion-card-subtitle>
       </ion-card-header>
   
       <ion-card-content>
         <app-card expandHeight="150px" [expanded]="report.expanded">
-          <p *ngFor="let bike of report.value" routerLink="map/{{bike.BikeID}}/{{bike.time}}" [state]="bike">{{bike.BikeID}}</p>
+          <ion-item *ngFor="let bike of report.value[0]" routerLink="map/{{bike.BikeID}}/{{bike.time}}" [state]="bike"><p>{{bike.bikename}}</p><p slot="end">{{bike.distance | number: '1.2-2'}}km</p></ion-item>
         </app-card>
       </ion-card-content>
     </ion-card>
