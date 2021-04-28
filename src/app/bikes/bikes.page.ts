@@ -29,14 +29,16 @@ export class BikesPage implements OnInit {
     jsonbikes.forEach(element => {
       this.service.GetBikePing(element.bikeid).subscribe(response => {
         if(response != undefined && response != null) {
-          this.AddBikeCard(response, element.bikename)
+          if (response.time == undefined || response.time == null)
+            this.AddErrorCard(response, element.bikename)
+          else
+            this.AddBikeCard(response, element.bikename)
           console.log(response)
         } else {
           console.log("here")
         }
       }, error => {
         console.log(error)
-        this.AddErrorCard(element.bikename)
       });
     })
   }
@@ -58,8 +60,9 @@ export class BikesPage implements OnInit {
     this.loading = false;
   }
 
-  AddErrorCard(bikename : string) {
+  AddErrorCard(bike : IBikePing, bikename : string) {
     var newcard : ICard = {
+      id: bike.id,
       name: bikename,
       type: "B",
       time: 0
@@ -92,12 +95,12 @@ export class BikesPage implements OnInit {
 
 interface IBikeCard extends ICard {
   lon: string;
-  id: string;
   lat: string;
   bat: number;
 }
 
 export interface ICard {
+  id: string;
   name : string;
   type: string;
   time: number;

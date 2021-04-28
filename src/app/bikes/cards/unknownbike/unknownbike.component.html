@@ -2,7 +2,7 @@
   <ion-card-header class="grid-item">
     <div style="display: flex;">
       <ion-card-title color="dark" style="font-weight: bold;">{{bike.name}}</ion-card-title>
-      <ion-button fill="clear" size="small" style="display: inline;">
+      <ion-button fill="clear" size="small" style="display: inline;" (click)="presentPopover($event,bike)">
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
     </div>
