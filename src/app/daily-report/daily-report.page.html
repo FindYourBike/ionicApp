@@ -20,7 +20,7 @@
   
       <ion-card-content>
         <app-card expandHeight="150px" [expanded]="report.expanded">
-          <ion-item *ngFor="let bike of report.value[0]" routerLink="map/{{bike.BikeID}}/{{bike.time}}" [state]="bike"><p>{{bike.bikename}}</p><p slot="end">{{bike.distance | number: '1.2-2'}}km</p></ion-item>
+          <ion-item *ngFor="let bike of report.value[0]" routerLink="map/{{bike.BikeID}}" [state]="bike"><p>{{bike.bikename}}</p><p slot="end">{{bike.distance | number: '1.2-2'}}km</p></ion-item>
         </app-card>
       </ion-card-content>
     </ion-card>

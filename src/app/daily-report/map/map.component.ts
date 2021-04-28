@@ -47,8 +47,13 @@ export class MapComponent implements OnInit {
     this.state$.subscribe(report => {this.SetReport(report)})
     this.latitude = 0
     this.longitude = 0
-    //this.BikeID = this.route.snapshot.paramMap.get('BikeID')
-    //this.service.GetBikePing(this.BikeID).subscribe(response => this.SetBikeInfo(response))
+    this.BikeID = this.route.snapshot.paramMap.get('BikeID')
+    this.service.GetBikePing(this.BikeID).subscribe(response => this.SetBikeLocation(response))
+  }
+
+  SetBikeLocation(info : IBikePing){
+    this.latitude = Number(info.lat);
+    this.longitude = Number(info.lon);
   }
 
   SetReport(report){

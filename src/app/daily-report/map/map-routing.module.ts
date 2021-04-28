@@ -5,7 +5,7 @@ import { MapComponent } from './map.component';
 
 const routes: Routes = [
   {
-    path: ':BikeID/:Date',
+    path: ':BikeID',
     component: MapComponent
   },
   {
