@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { IUserInfo } from '../services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { IUserInfo } from '../services/auth.service';
 export class TabsPage implements OnInit {
 
   @Input() user : IUserInfo
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }
