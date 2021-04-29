@@ -30,8 +30,6 @@ export class AddPage implements OnInit {
   }
 
   ngAfterViewInit() {
-    // child is set
-    //this.slides.lockSwipes(true);
     this.slides.lockSwipeToNext(true);
 }
 

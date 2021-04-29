@@ -13,9 +13,7 @@
         <ion-icon name="navigate-outline" slot="start"></ion-icon>
         Find this bike
       </ion-button>
-      <!--<ion-button color="danger" fill="clear" slot="end">
-        <ion-icon name="trash-outline" slot="end"></ion-icon> 
-      </ion-button>--><br>
+      <br>
       Last updated:
       <p style="display: inline;" *ngIf="bike.time < 60"><b>{{bike.time | number: '1.0-0'}} S</b>econd(s) ago</p>
       <p style="display: inline;" *ngIf="60 <= bike.time && bike.time < 3600"><b>{{(bike.time / 60) | number: '1.0-0'}} M</b>inute(s) ago</p>
