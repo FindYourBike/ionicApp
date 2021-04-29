@@ -55,6 +55,7 @@ export class DailyReportPage implements OnInit {
 
   refresh(): void{
     this.loading = true;
+    this.reportsmap = new Map();
     this.reports_day = new Array()
     this.service.GetBikes().subscribe(response => this.SetBikes(response))
   }
