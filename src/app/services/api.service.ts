@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  constructor(private http : HttpClient, private service : AuthService) { 
+  constructor(private http : HttpClient, private service : AuthService, public toastController: ToastController) { 
 
   }
 
@@ -49,8 +50,22 @@ export class APIService {
       })
     };
 
-    this.http.patch<any>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {console.log(data)})  }
+    this.http.patch<any>(`https://pjseu3wbn4.execute-api.us-east-1.amazonaws.com/dev/users/` + this.service.getUserID(), JSON.parse(body), httpOptions).subscribe(data => {
+      console.log(data)
+      this.presentToast("Succes, please reload page")
+    }) 
+   }
+
+   async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
+}
+
+  
 
 
 
