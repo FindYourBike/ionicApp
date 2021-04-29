@@ -71,7 +71,7 @@ export class PopovercomponentPage implements OnInit {
     this.router.navigate(['/tabs/bikes']);
   }
 
-  async presentAlertPrompt() {
+  async presentAlertChangeName() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Change name',
@@ -99,6 +99,30 @@ export class PopovercomponentPage implements OnInit {
         }
       ]
     });
+    await alert.present();
+  }
+
+  async presentAlertDelete() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete bike?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            this.tryDeleteBike()
+          }
+        }
+      ]
+    });
+
     await alert.present();
   }
 
