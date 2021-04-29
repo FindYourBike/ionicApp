@@ -18,7 +18,7 @@ export class DailyReportPage implements OnInit {
   }
 
   ngOnInit() {
-    this.service.GetBikes().subscribe(response => this.SetBikes(response))
+    this.refresh()
   }
 
 
@@ -53,10 +53,14 @@ export class DailyReportPage implements OnInit {
     this.loading = false;
   }
 
+  refresh(): void{
+    this.loading = true;
+    this.reports_day = new Array()
+    this.service.GetBikes().subscribe(response => this.SetBikes(response))
+  }
+
   sortReports() {
     this.reports_day.sort(function(a, b) {
-      console.log("a: " + a.name)
-      console.log("b: " + b.name)
       return b.name - a.name;
     });
   }
