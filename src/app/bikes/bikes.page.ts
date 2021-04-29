@@ -33,6 +33,9 @@ export class BikesPage implements OnInit {
             this.AddErrorCard(response, element.bikename)
           else
             this.AddBikeCard(response, element.bikename)
+
+          this.sortBikes();
+          this.loading = false;
           console.log(response)
         } else {
           console.log("here")
@@ -56,8 +59,6 @@ export class BikesPage implements OnInit {
       type: "A"
     }
     this.bikes.push(newbike);
-    this.sortBikes();
-    this.loading = false;
   }
 
   AddErrorCard(bike : IBikePing, bikename : string) {
@@ -68,8 +69,6 @@ export class BikesPage implements OnInit {
       time: 0
     }
     this.bikes.push(newcard);
-    this.sortBikes();
-    this.loading = false;
   }
 
   refresh(): void{

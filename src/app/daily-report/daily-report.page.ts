@@ -48,8 +48,17 @@ export class DailyReportPage implements OnInit {
       }
     });
     this.reports_day = Array.from(this.reportsmap, ([name, value]) => ({ name, value }));
+    this.sortReports()
     console.log(this.reports_day)
     this.loading = false;
+  }
+
+  sortReports() {
+    this.reports_day.sort(function(a, b) {
+      console.log("a: " + a.name)
+      console.log("b: " + b.name)
+      return b.name - a.name;
+    });
   }
 
   expandItem(item): void {
